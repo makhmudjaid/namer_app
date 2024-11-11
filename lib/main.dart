@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -12,13 +13,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List changeBackgroundColor = MyAppState()._backgroundColor;
     return ChangeNotifierProvider(
       create: (context) => MyAppState(),
       child: MaterialApp(
         title: 'Namer App',
         theme: ThemeData(
           useMaterial3: true,
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.pink.shade900),
+          colorScheme: ColorScheme.fromSeed(seedColor: Color.fromARGB(changeBackgroundColor[0], changeBackgroundColor[1], changeBackgroundColor[2],changeBackgroundColor[3])),
         ),
         home: MyHomePage(),
       ),
@@ -43,6 +45,18 @@ class MyAppState extends ChangeNotifier {
     }
     notifyListeners();
   }
+  List _backgroundColor = [255, 140, 140, 140];
+  changeBackgroundColor() {
+      _backgroundColor = [
+        255,
+        Random().nextInt(256),
+        Random().nextInt(256),
+        Random().nextInt(256),
+      ];
+    notifyListeners();
+  }
+  
+  void setState(Null Function() param0) {} 
 }
 
 class MyHomePage extends StatefulWidget {
@@ -54,14 +68,13 @@ class _MyHomePageState extends State<MyHomePage> {
   var selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
+    var appColor = context.watch<MyAppState>();
     Widget page;
     switch (selectedIndex) {
       case 0:
         page = GeneratorPage();
-        break;
       case 1:
         page = FavoritesPage();
-        break;
       default:
         throw UnimplementedError('no widget for $selectedIndex');
     }
@@ -91,6 +104,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
               ),
             ),
+                ElevatedButton.icon(
+                  onPressed: () {
+                    appColor.changeBackgroundColor();
+                  },
+                  icon: Placeholder(),
+                  label: Text('Like'),
+                ),
             Expanded(
               child: Container(
                 color: Theme.of(context).colorScheme.secondary,
