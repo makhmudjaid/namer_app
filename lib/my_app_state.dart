@@ -4,12 +4,18 @@ import 'package:flutter/material.dart';
 
 class MyAppState extends ChangeNotifier {
   var current = WordPair.random();
+  var favoriteThemes = [];
+  var favorites = <WordPair>[];
+  List<int> backgroundColor = [
+    255,
+    Random().nextInt(256),
+    Random().nextInt(256),
+    Random().nextInt(256),
+  ];
   void getNext() {
     current = WordPair.random();
     notifyListeners();
   }
-
-  var favorites = <WordPair>[];
 
   void toggleFavorite() {
     if (favorites.contains(current)) {
@@ -20,8 +26,6 @@ class MyAppState extends ChangeNotifier {
     notifyListeners();
   }
 
-  var favoriteThemes = [];
-
   void toggleFavoriteColor() {
     if (favoriteThemes.contains(backgroundColor)) {
       favoriteThemes.remove(backgroundColor);
@@ -30,13 +34,6 @@ class MyAppState extends ChangeNotifier {
     }
     notifyListeners();
   }
-
-  List<int> backgroundColor = [
-    255,
-    Random().nextInt(256),
-    Random().nextInt(256),
-    Random().nextInt(256),
-  ];
 
   void changeBackgroundColor() {
     backgroundColor = [

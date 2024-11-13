@@ -9,7 +9,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     List<int> changeBackgroundColor =
         Provider.of<MyAppState>(context).backgroundColor;
-    print(changeBackgroundColor);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Namer App',
