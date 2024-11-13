@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 import 'package:namer_app/title_widget.dart';
 import 'package:namer_app/my_app_state.dart';

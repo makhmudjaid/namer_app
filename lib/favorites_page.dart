@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 import 'package:namer_app/my_app_state.dart';
 
@@ -8,6 +7,9 @@ class FavoritesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final style = theme.textTheme.displaySmall!.copyWith(
+      color: theme.colorScheme.onPrimary,
+    );
+    final headerstyle = theme.textTheme.titleLarge!.copyWith(
       color: theme.colorScheme.onPrimary,
     );
     var appState = context.watch<MyAppState>();
@@ -21,10 +23,14 @@ class FavoritesPage extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.all(20),
-          child: Text('You have ' '${appState.favorites.length} favorites'),
+          child: Text(
+            'You have ' '${appState.favorites.length} favorites',
+            style: headerstyle,
+          ),
         ),
         for (var pair in appState.favorites)
           ListTile(
+            iconColor: Theme.of(context).colorScheme.onPrimary,
             leading: Icon(Icons.favorite),
             title: Text(
               pair.asPascalCase,
