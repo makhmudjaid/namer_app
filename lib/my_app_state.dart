@@ -7,10 +7,10 @@ class MyAppState extends ChangeNotifier {
   var favoriteThemes = [];
   var favorites = <WordPair>[];
   List<int> backgroundColor = [
-    255,
-    Random().nextInt(256),
-    Random().nextInt(256),
-    Random().nextInt(256),
+    256,
+    256,
+    256,
+    256,
   ];
   void getNext() {
     current = WordPair.random();
@@ -37,7 +37,7 @@ class MyAppState extends ChangeNotifier {
 
   void changeBackgroundColor() {
     backgroundColor = [
-      255,
+      Random().nextInt(256),
       Random().nextInt(256),
       Random().nextInt(256),
       Random().nextInt(256),
